@@ -7,13 +7,13 @@
 
 ---
 
-## 📌 Overview
+##  Overview
 **AeroLogic** is a full-stack web application built with **Django** that demonstrates key backend development principles.  
 It manages a relational database of airports and flights, highlighting a clean implementation of the **Model–View–Template (MVT)** architecture.
 
 ---
 
-## 🚀 Features
+##  Features
 - **Comprehensive Data Models** – Define `Airport` and `Flight` entities with appropriate fields and relationships.  
 - **Relational Database Design** – Implements one-to-many relationships via Django’s `ForeignKey`, linking flights to their origin and destination airports.  
 - **Django ORM Proficiency** – Perform CRUD (Create, Read, Update, Delete) operations using Django ORM without raw SQL.  
@@ -23,7 +23,7 @@ It manages a relational database of airports and flights, highlighting a clean i
 
 ---
 
-## 🗃️ Database Schema
+##  Database Schema
 
 ### Airport Model
 - `code` *(CharField)* – The 3-letter IATA code (e.g., `JFK`).  
@@ -38,7 +38,7 @@ This schema allows for powerful queries, such as retrieving all flights departin
 
 ---
 
-## 🛠️ Installation & Setup
+##  Installation & Setup
 
 1. **Clone the Repository**
    ```bash
