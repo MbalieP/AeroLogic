@@ -9,4 +9,13 @@
     
     </ul>
 
+    <h2>Passengers</h2>
+    <ul>
+        {% for passenger in passangers %}
+            <li>{{ passenger }}</li>
+        {% empty %}
+            <li>No passangers.</li> 
+        {% endfor %}       
+    </ul>
+
 {% endblock %}
