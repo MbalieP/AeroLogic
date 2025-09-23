@@ -1,0 +1,35 @@
+{% extends "flights/layout.html" %}
+
+{% block body %}
+<h2 class="mb-3">Check-in for Flight {{ flight.id }}</h2>
+<p>Origin: {{ flight.origin }} → Destination: {{ flight.destination }}</p>
+
+<h3 class="mt-4">Checked-in</h3>
+<ul class="list-group mb-3">
+  {% for bp in checked_in %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      {{ bp.passenger }}
+      <span class="badge text-bg-success">{{ bp.checked_in_at }}</span>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No one has checked in yet.</li>
+  {% endfor %}
+</ul>
+
+<h3>Check in a passenger</h3>
+<form class="row gy-2 gx-2 align-items-center" method="post">
+  {% csrf_token %}
+  <div class="col-auto">
+    <select name="passenger" class="form-select">
+      {% for p in eligible %}
+        <option value="{{ p.id }}">{{ p }}</option>
+      {% empty %}
+        <option disabled>All passengers are checked in.</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary" type="submit" {% if not eligible %}disabled{% endif %}>Check in</button>
+  </div>
+</form>
+{% endblock %}

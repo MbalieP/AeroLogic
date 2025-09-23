@@ -1,0 +1,12 @@
+{% extends "flights/layout.html" %}
+
+{% block body %}
+<h2>Ops Dashboard</h2>
+<ul>
+{% for f in flights %}
+  <li>Flight {{ f.id }}: {{ f.origin }} → {{ f.destination }} ({{ f.duration }} mins)</li>
+{% empty %}
+  <li>No flights found.</li>
+{% endfor %}
+</ul>
+{% endblock %}

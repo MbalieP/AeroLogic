@@ -17,9 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include,path
+from flights.views import index as flights_home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("flights/", include("flights.urls")),
     path("users/", include("users.urls")),
+    path("", include("checkin.urls")),
+    path("", include("ops.urls")),
+    path('', flights_home, name='home'),
 ]
