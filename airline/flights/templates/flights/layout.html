@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flights</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'flights/styles.css' %}" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="/">AeroLogic</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample" aria-controls="navbarsExample" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +23,7 @@
             </div>
         </div>
     </nav>
-    <main class="container">
+    <main class="container pb-5">
         {% if messages %}
           <div class="mb-3">
             {% for message in messages %}
@@ -32,6 +34,12 @@
         {% block body %}
         {% endblock%}
     </main>
+    <footer class="footer border-top py-3 text-muted small">
+        <div class="container d-flex justify-content-between">
+            <span>© {{ now|date:'Y' }} AeroLogic</span>
+            <span>Demo build</span>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

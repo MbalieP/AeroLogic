@@ -1,19 +1,27 @@
 {% extends "flights/layout.html" %}
 
 {% block body %}
-    <h1 class="mb-3">Flights</h1>
-    <ul class="list-group">
-        {% for flight in flights %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="{% url 'flight' flight.id %}">
-                    Flight {{flight.id}}: {{ flight.origin}} to {{ flight.destination }}
-                </a>
-                <a class="btn btn-sm btn-outline-primary" href="/flight/{{ flight.id }}/checkin">Check-in</a>
-            </li>
-        {% empty %}
-            <li class="list-group-item">No flights.</li>
-        {% endfor %}    
-    </ul>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="m-0">Flights</h1>
+    </div>
+
+    <div class="card-plain">
+        <ul class="list-group list-group-flush">
+            {% for flight in flights %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="{% url 'flight' flight.id %}" class="fw-semibold">
+                            Flight {{flight.id}}: {{ flight.origin}} → {{ flight.destination }}
+                        </a>
+                        <div class="text-muted small">Duration: {{ flight.duration }} minutes</div>
+                    </div>
+                    <a class="btn btn-sm btn-outline-primary" href="/flight/{{ flight.id }}/checkin">Check-in</a>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No flights.</li>
+            {% endfor %}    
+        </ul>
+    </div>
 {% endblock %}
 
 

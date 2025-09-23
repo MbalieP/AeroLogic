@@ -2,34 +2,43 @@
 
 {% block body %}
 <h2 class="mb-3">Check-in for Flight {{ flight.id }}</h2>
-<p>Origin: {{ flight.origin }} → Destination: {{ flight.destination }}</p>
+<p class="text-muted">Origin: {{ flight.origin }} → Destination: {{ flight.destination }}</p>
 
-<h3 class="mt-4">Checked-in</h3>
-<ul class="list-group mb-3">
-  {% for bp in checked_in %}
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      {{ bp.passenger }}
-      <span class="badge text-bg-success">{{ bp.checked_in_at }}</span>
-    </li>
-  {% empty %}
-    <li class="list-group-item">No one has checked in yet.</li>
-  {% endfor %}
-</ul>
-
-<h3>Check in a passenger</h3>
-<form class="row gy-2 gx-2 align-items-center" method="post">
-  {% csrf_token %}
-  <div class="col-auto">
-    <select name="passenger" class="form-select">
-      {% for p in eligible %}
-        <option value="{{ p.id }}">{{ p }}</option>
-      {% empty %}
-        <option disabled>All passengers are checked in.</option>
-      {% endfor %}
-    </select>
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card-plain">
+      <div class="section-title mb-2">Checked-in</div>
+      <ul class="list-group list-group-flush mb-0">
+        {% for bp in checked_in %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ bp.passenger }}
+            <span class="badge text-bg-success">{{ bp.checked_in_at }}</span>
+          </li>
+        {% empty %}
+          <li class="list-group-item">No one has checked in yet.</li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
-  <div class="col-auto">
-    <button class="btn btn-primary" type="submit" {% if not eligible %}disabled{% endif %}>Check in</button>
+  <div class="col-md-6">
+    <div class="card-plain">
+      <div class="section-title mb-2">Check in a passenger</div>
+      <form class="row gy-2 gx-2 align-items-center" method="post">
+        {% csrf_token %}
+        <div class="col-8 col-sm-9">
+          <select name="passenger" class="form-select">
+            {% for p in eligible %}
+              <option value="{{ p.id }}">{{ p }}</option>
+            {% empty %}
+              <option disabled>All passengers are checked in.</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-4 col-sm-3 text-end">
+          <button class="btn btn-primary w-100" type="submit" {% if not eligible %}disabled{% endif %}>Check in</button>
+        </div>
+      </form>
+    </div>
   </div>
-</form>
+</div>
 {% endblock %}

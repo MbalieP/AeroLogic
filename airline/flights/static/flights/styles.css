@@ -1,0 +1,38 @@
+:root {
+  --brand: #0d6efd;
+  --bg: #f8fafc;
+}
+
+body {
+  background: var(--bg);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.list-group-item a {
+  text-decoration: none;
+}
+
+.btn-outline-primary {
+  --bs-btn-hover-bg: var(--brand);
+  --bs-btn-hover-color: #fff;
+}
+
+.footer {
+  background: #fff;
+}
+
+.card-plain {
+  background: #fff;
+  border-radius: .5rem;
+  box-shadow: 0 1px 8px rgba(0,0,0,.05);
+  padding: 1rem 1.25rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}

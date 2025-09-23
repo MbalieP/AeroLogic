@@ -1,39 +1,53 @@
 {% extends "flights/layout.html" %}
 
 {% block body %}
-    <h1 class="mb-3">Flight {{ flight.id }}</h1>
-    <ul class="list-group mb-3">
-        <li class="list-group-item">Origin: {{ flight.origin }}</li>
-        <li class="list-group-item">Destination: {{ flight.destination }}</li>
-        <li class="list-group-item">Duration: {{ flight.duration }} minutes</li>
-    </ul>
-
-    <div class="d-flex gap-2 mb-4">
-        <a class="btn btn-primary" href="/flight/{{ flight.id }}/checkin">Check-in</a>
-        <a class="btn btn-outline-secondary" href="{% url 'index' %}">Back to flights</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="m-0">Flight {{ flight.id }}</h1>
+        <div class="d-flex gap-2">
+            <a class="btn btn-primary" href="/flight/{{ flight.id }}/checkin">Check-in</a>
+            <a class="btn btn-outline-secondary" href="{% url 'index' %}">Back to flights</a>
+        </div>
     </div>
 
-    <h2>Passengers</h2>
-    <ul class="list-group mb-3">
-        {% for passenger in passengers %}
-            <li class="list-group-item">{{ passenger }}</li>
-        {% empty %}
-            <li class="list-group-item">No passengers.</li> 
-        {% endfor %}       
-    </ul>
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="card-plain">
+                <div class="section-title mb-2">Details</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Origin: {{ flight.origin }}</li>
+                    <li class="list-group-item">Destination: {{ flight.destination }}</li>
+                    <li class="list-group-item">Duration: {{ flight.duration }} minutes</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-plain">
+                <div class="section-title mb-2">Add Passenger</div>
+                <form class="row gy-2 gx-2 align-items-center" action="{% url 'book' flight.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-8 col-sm-9">
+                        <select class="form-select" name="passenger">
+                            {% for passenger in non_passengers %}
+                                <option value="{{ passenger.id}}">{{passenger}}</option>
+                            {% endfor %}    
+                        </select>
+                    </div>
+                    <div class="col-4 col-sm-3 text-end">
+                        <button type="submit" class="btn btn-success w-100">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <h2>Add Passenger</h2>
-    <form class="row gy-2 gx-2 align-items-center" action="{% url 'book' flight.id %}" method="post">
-        {% csrf_token %}
-        <div class="col-auto">
-            <select class="form-select" name="passenger">
-                {% for passenger in non_passengers %}
-                    <option value="{{ passenger.id}}">{{passenger}}</option>
-                {% endfor %}    
-            </select>
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-success">Add</button>
-        </div>
-    </form>
+    <div class="card-plain">
+        <div class="section-title mb-2">Passengers</div>
+        <ul class="list-group list-group-flush">
+            {% for passenger in passengers %}
+                <li class="list-group-item">{{ passenger }}</li>
+            {% empty %}
+                <li class="list-group-item">No passengers.</li> 
+            {% endfor %}       
+        </ul>
+    </div>
 {% endblock %}
