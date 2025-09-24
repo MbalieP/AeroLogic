@@ -91,7 +91,7 @@ This scope is more complex than earlier projects: it introduces concurrent state
 
 ### Airport Model
 - `code` *(CharField)* – The 3-letter IATA code (e.g., `JFK`).  
-- `city` *(CharField)* – The city where the airport is located.  
+- `city` *(CharField)* – The city where the airport is located
 
 ### Flight Model
 - `origin` *(ForeignKey → Airport)* – Departure airport (`related_name="departures"`).  
